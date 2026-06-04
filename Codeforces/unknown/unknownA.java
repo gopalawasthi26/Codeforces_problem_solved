@@ -5,36 +5,29 @@
  * Date     : 04 Jun 2026
  */
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
-public class Solution {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int t = scanner.nextInt();
-        while (t-- > 0) {
-            int n = scanner.nextInt();
-            String s = scanner.next();
-            
-            boolean canSpread = false;
-            int count = 0;
-            
-            for (int i = 0; i < n; i++) {
-                if (s.charAt(i) == '.') {
-                    count++;
-                }
-                if (i > 0 && i < n - 1) {
-                    if (s.charAt(i - 1) == '.' && s.charAt(i) == '.' && s.charAt(i + 1) == '.') {
-                        canSpread = true;
-                    }
-                }
-            }
-            
-            if (canSpread) {
-                System.out.println(2);
-            } else {
-                System.out.println(count);
-            }
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        int[] cost = new int[4];
+        for (int i = 0; i < 4; i++) {
+            cost[i] = Integer.parseInt(st.nextToken());
         }
-        scanner.close();
+
+        String s = br.readLine();
+        long totalCalories = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            int strip = s.charAt(i) - '1';
+            totalCalories += cost[strip];
+        }
+
+        System.out.println(totalCalories);
     }
 }
