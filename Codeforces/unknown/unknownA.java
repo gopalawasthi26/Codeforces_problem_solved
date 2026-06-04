@@ -2,40 +2,39 @@
  * Problem  : unknownA
  * Contest  : unknown | Problem : A
  * Language : Java 21 64bit
- * Date     : 30 May 2026
+ * Date     : 04 Jun 2026
  */
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+import java.util.Scanner;
 
-public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine());
-        int[] counts = new int[5];
-
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        for (int i = 0; i < n; i++) {
-            counts[Integer.parseInt(st.nextToken())]++;
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int t = scanner.nextInt();
+        while (t-- > 0) {
+            int n = scanner.nextInt();
+            String s = scanner.next();
+            
+            boolean canSpread = false;
+            int count = 0;
+            
+            for (int i = 0; i < n; i++) {
+                if (s.charAt(i) == '.') {
+                    count++;
+                }
+                if (i > 0 && i < n - 1) {
+                    if (s.charAt(i - 1) == '.' && s.charAt(i) == '.' && s.charAt(i + 1) == '.') {
+                        canSpread = true;
+                    }
+                }
+            }
+            
+            if (canSpread) {
+                System.out.println(2);
+            } else {
+                System.out.println(count);
+            }
         }
-
-        int taxis = counts[4];
-        
-        taxis += counts[3];
-        counts[1] = Math.max(0, counts[1] - counts[3]);
-        
-        taxis += counts[2] / 2;
-        counts[2] %= 2;
-        
-        if (counts[2] > 0) {
-            taxis++;
-            counts[1] = Math.max(0, counts[1] - 2);
-        }
-        
-        taxis += (counts[1] + 3) / 4;
-
-        System.out.println(taxis);
+        scanner.close();
     }
 }
