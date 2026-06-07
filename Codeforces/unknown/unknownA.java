@@ -2,32 +2,31 @@
  * Problem  : unknownA
  * Contest  : unknown | Problem : A
  * Language : Java 21 64bit
- * Date     : 04 Jun 2026
+ * Date     : 07 Jun 2026
  */
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        sc.close();
+        
+        int availableTime = 240 - k;
+        int timeSpent = 0;
+        int problemsSolved = 0;
 
-        int[] cost = new int[4];
-        for (int i = 0; i < 4; i++) {
-            cost[i] = Integer.parseInt(st.nextToken());
+        for (int i = 1; i <= n; i++) {
+            timeSpent += i * 5;
+            if (timeSpent <= availableTime) {
+                problemsSolved++;
+            } else {
+                break;
+            }
         }
-
-        String s = br.readLine();
-        long totalCalories = 0;
-
-        for (int i = 0; i < s.length(); i++) {
-            int strip = s.charAt(i) - '1';
-            totalCalories += cost[strip];
-        }
-
-        System.out.println(totalCalories);
+        
+        System.out.println(problemsSolved);
     }
 }
